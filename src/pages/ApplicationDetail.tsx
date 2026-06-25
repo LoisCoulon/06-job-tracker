@@ -1,7 +1,7 @@
 export default function ApplicationDetail() {
-
-    return (
-        <>
-        </>
-    )
+  return (
+    <>
+      <h1>Détail</h1>
+    </>
+  );
 }
