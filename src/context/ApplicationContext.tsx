@@ -1,4 +1,4 @@
-import { createContext, useState, useContext } from 'react';
+import { createContext, useState, useContext, useEffect } from 'react';
 import type { Application } from '../types/application';
 import { mockApplications } from '../datas/mockApplications';
 
@@ -18,8 +18,10 @@ interface ApplicationProviderProps {
 export default function ApplicationProvider({
   children,
 }: ApplicationProviderProps) {
-  const [applications, setApplications] =
-    useState<Application[]>(mockApplications);
+  const stored = localStorage.getItem('applications');
+  const [applications, setApplications] = useState<Application[]>(
+    stored !== null ? JSON.parse(stored) : mockApplications,
+  );
 
   function addApplication(newApp: Omit<Application, 'id'>) {
     const appWithId: Application = { ...newApp, id: Date.now() };
@@ -35,6 +37,10 @@ export default function ApplicationProvider({
       applications.map((app) => (app.id === updateApp.id ? updateApp : app)),
     );
   }
+
+  useEffect(() => {
+    localStorage.setItem('applications', JSON.stringify(applications));
+  }, [applications]);
 
   return (
     <ApplicationContext.Provider
