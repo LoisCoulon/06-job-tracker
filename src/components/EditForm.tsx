@@ -62,7 +62,7 @@ export default function EditForm({ onCancel, application }: EditFormPops) {
   return (
     <div className="modal-container" onClick={handleCancel}>
       <div className="form-container" onClick={(e) => e.stopPropagation()}>
-        <h2>Nouvelle candidature</h2>
+        <h2>Modification de la candidature</h2>
         <input
           type="text"
           onChange={handleJobNameChange}
