@@ -13,7 +13,7 @@ export default function ApplicationItem({
   const navigate = useNavigate();
 
   return (
-    <div key={application.id} className="application-container">
+    <div className="application-container">
       <p>Titre : {application.jobTitle}</p>
       <p>Entreprise : {application.entreprise}</p>
       <p>CV envoyé le : {application.applicationDate}</p>
