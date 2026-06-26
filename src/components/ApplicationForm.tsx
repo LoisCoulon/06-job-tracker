@@ -1,8 +1,6 @@
 import { useState } from 'react';
 import { useApplications } from '../context/ApplicationContext';
 import type { Application } from '../types/application';
-import '../styles/applicationform.css';
-
 interface ApplicationFormProps {
   onCancel: () => void;
 }
@@ -53,60 +51,95 @@ export default function ApplicationForm({ onCancel }: ApplicationFormProps) {
   }
 
   return (
-    <div className="modal-container" onClick={handleCancel}>
-      <div className="form-container" onClick={(e) => e.stopPropagation()}>
-        <h2>Nouvelle candidature</h2>
-        <input
-          type="text"
-          onChange={handleJobNameChange}
-          placeholder="Intitulé du poste"
-        />
-        <input
-          type="text"
-          onChange={handleEntrepriseChange}
-          placeholder="Nom de l'entreprise"
-        />
-        <select
-          onChange={handleStatusChange}
-          name="status"
-          id="status"
-          value={status}
-        >
-          <option value="à postuler">à postuler</option>
-          <option value="envoyée">envoyée</option>
-          <option value="entretien">entretien</option>
-          <option value="refus">refus</option>
-          <option value="offre">offre</option>
-        </select>
-        <div>
-          <label htmlFor="applicationDate">Date de la candidature</label>
+    <div
+      className="fixed inset-0 bg-black/60 backdrop-blur-sm flex items-center justify-center z-50"
+      onClick={handleCancel}
+    >
+      <div
+        className="bg-[#1a1a1f] border border-[#2a2a2f] rounded-lg p-6 w-full max-w-md flex flex-col gap-4"
+        onClick={(e) => e.stopPropagation()}
+      >
+        <h2 className="text-white font-semibold text-lg">
+          Nouvelle candidature
+        </h2>
+
+        <div className="flex flex-col gap-3">
           <input
-            onChange={handleApplicationDateChange}
-            type="date"
-            name="applicationDate"
-            id="applicationDate"
+            type="text"
+            onChange={handleJobNameChange}
+            placeholder="Intitulé du poste"
+            className="bg-[#0e0e10] border border-[#2a2a2f] text-white text-sm rounded-md px-3 py-2 placeholder-gray-600 focus:outline-none focus:border-indigo-500"
           />
-        </div>
-        {status === 'entretien' && (
-          <div>
-            <label htmlFor="interviewDate">Date de l'entretien</label>
+          <input
+            type="text"
+            onChange={handleEntrepriseChange}
+            placeholder="Nom de l'entreprise"
+            className="bg-[#0e0e10] border border-[#2a2a2f] text-white text-sm rounded-md px-3 py-2 placeholder-gray-600 focus:outline-none focus:border-indigo-500"
+          />
+          <select
+            onChange={handleStatusChange}
+            name="status"
+            id="status"
+            value={status}
+            className="bg-[#0e0e10] border border-[#2a2a2f] text-white text-sm rounded-md px-3 py-2 focus:outline-none focus:border-indigo-500"
+          >
+            <option value="à postuler">À postuler</option>
+            <option value="envoyée">Envoyée</option>
+            <option value="entretien">Entretien</option>
+            <option value="refus">Refus</option>
+            <option value="offre">Offre</option>
+          </select>
+
+          <div className="flex flex-col gap-1">
+            <label
+              htmlFor="applicationDate"
+              className="text-gray-500 text-xs uppercase tracking-wider"
+            >
+              Date de la candidature
+            </label>
             <input
-              onChange={handleInterviewDateChange}
+              onChange={handleApplicationDateChange}
               type="date"
-              name="interviewDate"
-              id="interviewDate"
+              name="applicationDate"
+              id="applicationDate"
+              className="bg-[#0e0e10] border border-[#2a2a2f] text-white text-sm rounded-md px-3 py-2 focus:outline-none focus:border-indigo-500"
             />
           </div>
-        )}
-        <div className="buttons">
-          <button onClick={handleCancel}>Annuler</button>
+
+          {status === 'entretien' && (
+            <div className="flex flex-col gap-1">
+              <label
+                htmlFor="interviewDate"
+                className="text-gray-500 text-xs uppercase tracking-wider"
+              >
+                Date de l'entretien
+              </label>
+              <input
+                onChange={handleInterviewDateChange}
+                type="date"
+                name="interviewDate"
+                id="interviewDate"
+                className="bg-[#0e0e10] border border-[#2a2a2f] text-white text-sm rounded-md px-3 py-2 focus:outline-none focus:border-indigo-500"
+              />
+            </div>
+          )}
+        </div>
+
+        <div className="flex justify-end gap-2 mt-2">
+          <button
+            onClick={handleCancel}
+            className="text-gray-400 hover:text-white text-sm px-4 py-2 rounded-md transition-colors"
+          >
+            Annuler
+          </button>
           <button
             disabled={
               jobName === '' || entreprise === '' || applicationDate === ''
             }
             onClick={handleSave}
+            className="bg-indigo-600 hover:bg-indigo-500 disabled:opacity-40 disabled:cursor-not-allowed text-white text-sm font-medium px-4 py-2 rounded-md transition-colors"
           >
-            Enregistrer la nouvelle candidature
+            Enregistrer
           </button>
         </div>
       </div>
