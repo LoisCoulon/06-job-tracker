@@ -12,6 +12,11 @@ export default function ApplicationItem({
 }: ApplicationItemProps) {
   const navigate = useNavigate();
 
+  function changeDate(date: string) {
+    const [year, month, day] = date.split('-');
+    return `${day}/${month}/${year}`;
+  }
+
   function getStatusColor(status: Application['status']) {
     switch (status) {
       case 'à postuler':
@@ -35,11 +40,11 @@ export default function ApplicationItem({
           Entreprise : {application.entreprise}
         </p>
         <p className="text-gray-500 text-xs">
-          CV envoyé le : {application.applicationDate}
+          CV envoyé le : {changeDate(application.applicationDate)}
         </p>
         {application.interviewDate && (
           <p className="text-gray-500 text-xs">
-            Entretien le : {application.interviewDate}
+            Entretien le : {changeDate(application.interviewDate)}
           </p>
         )}
         <div className="flex items-center gap-3">

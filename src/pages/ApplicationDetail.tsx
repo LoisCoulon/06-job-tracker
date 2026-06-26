@@ -18,6 +18,11 @@ export default function ApplicationDetail() {
     setIsEditing(false);
   }
 
+  function changeDate(date: string) {
+    const [year, month, day] = date.split('-');
+    return `${day}/${month}/${year}`;
+  }
+
   return (
     <div className="min-h-screen bg-[#0e0e10] text-white px-8 py-10">
       <div className="max-w-2xl mx-auto">
@@ -63,7 +68,9 @@ export default function ApplicationDetail() {
                 <p className="text-gray-500 text-xs uppercase tracking-wider">
                   Date de candidature
                 </p>
-                <p className="text-white">{application.applicationDate}</p>
+                <p className="text-white">
+                  {changeDate(application.applicationDate)}
+                </p>
               </div>
               <div className="flex flex-col gap-1">
                 <p className="text-gray-500 text-xs uppercase tracking-wider">
@@ -76,7 +83,9 @@ export default function ApplicationDetail() {
                   <p className="text-gray-500 text-xs uppercase tracking-wider">
                     Date d'entretien
                   </p>
-                  <p className="text-white">{application.interviewDate}</p>
+                  <p className="text-white">
+                    {changeDate(application.interviewDate)}
+                  </p>
                 </div>
               )}
             </div>
