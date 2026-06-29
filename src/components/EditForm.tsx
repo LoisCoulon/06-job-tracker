@@ -1,7 +1,6 @@
 import { useState } from 'react';
 import type { Application } from '../types/application';
 import { useApplications } from '../context/ApplicationContext';
-
 interface EditFormPops {
   onCancel: () => void;
   application: Application;
@@ -20,6 +19,9 @@ export default function EditForm({ onCancel, application }: EditFormPops) {
   );
   const [interviewDate, setInterviewDate] = useState<string | null>(
     application.interviewDate,
+  );
+  const [applicationLink, setApplicationLink] = useState<string | null>(
+    application.applicationLink,
   );
 
   function handleJobNameChange(event: React.ChangeEvent<HTMLInputElement>) {
@@ -43,6 +45,10 @@ export default function EditForm({ onCancel, application }: EditFormPops) {
     setInterviewDate(event.target.value);
   }
 
+  function handleLinkChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setApplicationLink(event.target.value);
+  }
+
   function handleSave() {
     const editApp = {
       id: application.id,
@@ -51,6 +57,7 @@ export default function EditForm({ onCancel, application }: EditFormPops) {
       status: status,
       applicationDate: applicationDate,
       interviewDate: status === 'entretien' ? interviewDate : null,
+      applicationLink: applicationLink,
     };
     updateApplication(editApp);
     onCancel();
@@ -85,6 +92,13 @@ export default function EditForm({ onCancel, application }: EditFormPops) {
             value={entreprise}
             onChange={handleEntrepriseChange}
             placeholder="Nom de l'entreprise"
+            className="bg-[#0e0e10] border border-[#2a2a2f] text-white text-sm rounded-md px-3 py-2 placeholder-gray-600 focus:outline-none focus:border-indigo-500"
+          />
+          <input
+            type="text"
+            value={applicationLink ? applicationLink : ''}
+            onChange={handleLinkChange}
+            placeholder="Lien vers l'offre d'emploi"
             className="bg-[#0e0e10] border border-[#2a2a2f] text-white text-sm rounded-md px-3 py-2 placeholder-gray-600 focus:outline-none focus:border-indigo-500"
           />
           <select

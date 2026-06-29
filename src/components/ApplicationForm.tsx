@@ -12,6 +12,7 @@ export default function ApplicationForm({ onCancel }: ApplicationFormProps) {
   const [entreprise, setEntreprise] = useState<string>('');
   const [applicationDate, setApplicationDate] = useState<string>('');
   const [interviewDate, setInterviewDate] = useState<string>('');
+  const [applicationLink, setApplicationLink] = useState<string | null>('');
 
   function handleJobNameChange(event: React.ChangeEvent<HTMLInputElement>) {
     setJobName(event.target.value);
@@ -34,6 +35,10 @@ export default function ApplicationForm({ onCancel }: ApplicationFormProps) {
     setInterviewDate(event.target.value);
   }
 
+  function handleLinkChange(event: React.ChangeEvent<HTMLInputElement>) {
+    setApplicationLink(event.target.value);
+  }
+
   function handleSave() {
     const newApp: Omit<Application, 'id'> = {
       jobTitle: jobName,
@@ -41,6 +46,7 @@ export default function ApplicationForm({ onCancel }: ApplicationFormProps) {
       status: status,
       applicationDate: applicationDate,
       interviewDate: status === 'entretien' ? interviewDate : null,
+      applicationLink: applicationLink,
     };
     addApplication(newApp);
     onCancel();
@@ -74,6 +80,12 @@ export default function ApplicationForm({ onCancel }: ApplicationFormProps) {
             type="text"
             onChange={handleEntrepriseChange}
             placeholder="Nom de l'entreprise"
+            className="bg-[#0e0e10] border border-[#2a2a2f] text-white text-sm rounded-md px-3 py-2 placeholder-gray-600 focus:outline-none focus:border-indigo-500"
+          />
+          <input
+            type="text"
+            onChange={handleLinkChange}
+            placeholder="Lien vers l'offre d'emploi"
             className="bg-[#0e0e10] border border-[#2a2a2f] text-white text-sm rounded-md px-3 py-2 placeholder-gray-600 focus:outline-none focus:border-indigo-500"
           />
           <select

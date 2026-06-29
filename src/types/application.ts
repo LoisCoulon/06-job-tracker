@@ -1,12 +1,16 @@
-export type ApplicationStatus = "à postuler" | "envoyée" | "entretien" | "refus" | "offre"
+export type ApplicationStatus =
+  | 'à postuler'
+  | 'envoyée'
+  | 'entretien'
+  | 'refus'
+  | 'offre';
 
-
-export interface Application{
-    id: number;
-    applicationDate: string;
-    jobTitle: string;
-    entreprise: string;
-    status: ApplicationStatus;
-    interviewDate: null | string;
-
+export interface Application {
+  id: number;
+  applicationDate: string;
+  jobTitle: string;
+  entreprise: string;
+  status: ApplicationStatus;
+  interviewDate: null | string;
+  applicationLink: null | string;
 }

@@ -64,6 +64,19 @@ export default function ApplicationDetail() {
                 </p>
                 <p className="text-white">{application.entreprise}</p>
               </div>
+              {application.applicationLink && (
+                <div className="flex flex-col gap-1">
+                  <p className="text-gray-500 text-xs uppercase tracking-wider">
+                    Lien vers l'offre d'emploi
+                  </p>
+                  <a
+                    href={application.applicationLink}
+                    className="text-blue-500"
+                  >
+                    {application.applicationLink}
+                  </a>
+                </div>
+              )}
               <div className="flex flex-col gap-1">
                 <p className="text-gray-500 text-xs uppercase tracking-wider">
                   Date de candidature

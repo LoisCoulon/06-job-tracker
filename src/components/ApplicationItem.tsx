@@ -39,6 +39,14 @@ export default function ApplicationItem({
         <p className="text-gray-400 text-sm">
           Entreprise : {application.entreprise}
         </p>
+        {application.applicationLink && (
+          <a
+            className="text-blue-500 text-sm"
+            href={application.applicationLink}
+          >
+            Lien vers l'offre d'emploi
+          </a>
+        )}
         <p className="text-gray-500 text-xs">
           CV envoyé le : {changeDate(application.applicationDate)}
         </p>
